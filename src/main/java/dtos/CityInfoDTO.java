@@ -1,3 +1,7 @@
+/* AUTHOR
+ * Annika R Jespersen
+ */
+
 package dtos;
 
 import entities.CityInfo;

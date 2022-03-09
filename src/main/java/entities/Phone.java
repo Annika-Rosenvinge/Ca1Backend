@@ -1,3 +1,6 @@
+/* AUTHOR
+ * Annika R Jespersen & Louise S. Estrup
+ */
 package entities;
 
 import dtos.PhoneDTO;
@@ -7,10 +10,16 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "PHONE")
+
+@NamedQueries({
+        @NamedQuery(name = "PHONE.getAll", query = "SELECT p from PHONE p "),
+        @NamedQuery(name = "PHONE.getPhone", query = "SELECT p from PHONE p WHERE p.phonenumber = :phonenumber")
+        //måske en mere hvor man kan vælge telefon nummer på baggrund af user id
+})
+
 public class Phone implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "phonenumber", updatable = true, nullable = false)
     private Integer phonenumber;
     @Column(name = "description")

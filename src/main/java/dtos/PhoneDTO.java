@@ -1,3 +1,6 @@
+/* AUTHOR
+ * Annika R Jespersen & Louise S. Estrup
+ */
 package dtos;
 
 import entities.Phone;

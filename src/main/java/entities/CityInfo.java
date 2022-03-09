@@ -1,3 +1,7 @@
+/* AUTHOR
+ * Annika R Jespersen
+ */
+
 package entities;
 
 import dtos.CityInfoDTO;
@@ -18,9 +22,7 @@ import java.util.List;
 public class CityInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //måske id column skal med.
-    @Column(name = "zipcode", length = 10, unique = true)
+    @Column(name = "zipcode", length = 10, unique = true, nullable = false)
     private String zipcode;
     @Column(name = "city", length=90, unique = false)
     private String city;
