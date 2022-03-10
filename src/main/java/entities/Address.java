@@ -1,3 +1,7 @@
+/* AUTHOR
+ * Annika R Jespersen
+ */
+
 package entities;
 
 import dtos.AddressDTO;
@@ -19,7 +23,7 @@ public class Address implements Serializable {
     //ID generations
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
+    @Column(name = "id", nullable = false)
     private Integer id;
 
     //rest of ADDRESS attributes
