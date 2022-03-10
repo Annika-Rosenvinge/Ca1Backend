@@ -5,6 +5,7 @@ import dtos.HobbyDTO;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "HOBBY")
@@ -81,6 +82,11 @@ public class Hobby implements Serializable {
     public void setWikiLink(String wikiLink) {
         this.wikiLink = wikiLink;
     }
+
+    public List<Person> getPersons() {
+        return persons;
+    }
+
 
     @Override
     public String toString() {

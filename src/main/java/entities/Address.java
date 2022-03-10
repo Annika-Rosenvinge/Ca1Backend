@@ -8,6 +8,7 @@ import dtos.AddressDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 
 @Entity
@@ -38,6 +39,7 @@ public class Address implements Serializable {
     @ManyToOne
     private CityInfo cityInfo;
 
+
     public Address(){
 
     }
@@ -56,7 +58,7 @@ public class Address implements Serializable {
     public Address (AddressDTO addressDTO){
         this.street = addressDTO.getStreet();
         this.additionalInfo = addressDTO.getAdditionalInfo();
-        this.cityInfo = new CityInfo(addressDTO.getCityInfo());
+        this.cityInfo = new CityInfo(addressDTO.getCityInfoDTO());
     }
 
 
@@ -92,14 +94,14 @@ public class Address implements Serializable {
         this.cityInfo = cityInfo;
     }
 
-    public  List<Person> getPersons(){
+    public List<Person> getPersons(){
         return persons;
     }
 
     public void addPerson (Person person){
         if (person != null){
             person.setAddress(this);
-            this.person.add(person);
+            this.persons.add(person);
         }
     }
     @Override
