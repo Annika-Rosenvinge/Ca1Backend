@@ -9,13 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-//Hvad tabellen hedder, som skal bruges ved SELECT, DELETE ect
 @Table(name = "USER")
-/*@NamedQueries({
-        @NamedQuery(name = "USER.deleteAllRows", query = "DELETE from USER"),
-        @NamedQuery(name = "USER.getPerson", query = "SELECT u from USER u"),
-        @NamedQuery(name = "USER.getPersonById", query = "")
-})*/
+@NamedQueries({
+        @NamedQuery(name = "USER.deleteAllRows", query = "DELETE from Person"),
+        @NamedQuery(name = "USER.getAllRows", query = "SELECT p from Person p")
+        //@NamedQuery(name = "USER.getPersonById", query = "")
+})
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -191,6 +190,10 @@ public class Person {
 
     public void setHobbyList(List<Hobby> hobbyList) {
         this.hobbyList = hobbyList;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

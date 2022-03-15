@@ -2,13 +2,11 @@ package facades;
 
 import dtos.HobbyDTO;
 import dtos.PersonDTO;
+import dtos.PersonsDTO;
 import entities.*;
 import utils.Utility;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.Query;
+import javax.persistence.*;
 import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;
 import java.util.List;
@@ -96,7 +94,7 @@ public class PersonFacade implements IPersonFacade {
 
 
     //CRUD METODER FOR PERSON
-
+    //CREATE - test og endpoint er lavet
     public synchronized PersonDTO createPerson(PersonDTO personDTO) {
 
         if (Utility.ValidatePersonDTO(personDTO) && !emailTaken(personDTO)){
@@ -145,4 +143,45 @@ public class PersonFacade implements IPersonFacade {
             throw new WebApplicationException("Error 400", 400);
         }
     }
+
+    //FIND ALL - test og endpoint er lavet
+    public PersonsDTO findAllPersons(){
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+
+            TypedQuery <Person> typedQuery = em.createNamedQuery("USER.getAllRows", Person.class);
+            List<Person> allPersons = typedQuery.getResultList();
+            PersonsDTO personsDTO = new PersonsDTO(allPersons);
+
+            em.getTransaction().commit();
+
+            return personsDTO;
+        }finally {
+            em.close();
+        }
+    }
+
+    //FIND ONE - test og endpoint er lavet
+    public PersonDTO findPersonsById(Long id){
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+
+        Person person = em.find(Person.class, id);
+
+        em.getTransaction().commit();
+        em.close();
+
+        if(person != null){
+            person.setId(id);
+            return new PersonDTO(person);
+        }else{
+            return null;
+        }
+
+    }
+
+    //UPDATE
+
+    //DELETE
 }

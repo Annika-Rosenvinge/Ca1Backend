@@ -14,6 +14,7 @@ import java.io.Serializable;
 
 @NamedQueries({
         @NamedQuery(name = "PHONE.getAll", query = "SELECT p from Phone p "),
+        @NamedQuery(name = "PHONE.deleteAllRows", query = "DELETE FROM Phone "),
         @NamedQuery(name = "PHONE.getPhone", query = "SELECT p from Phone p WHERE p.phonenumber = :phonenumber")
         //måske en mere hvor man kan vælge telefon nummer på baggrund af user id, kan være at den måske skal være som metode
 })
