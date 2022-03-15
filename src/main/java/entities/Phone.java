@@ -7,6 +7,8 @@ import dtos.PhoneDTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "PHONE")
@@ -44,6 +46,14 @@ public class Phone implements Serializable {
     public Phone (PhoneDTO phoneDTO){
         this.phonenumber = phoneDTO.getPhonenumber();
         this.description = phoneDTO.getDescription();
+    }
+
+    public static List<Phone> getEntites(List<PhoneDTO> phoneDTOS) {
+        List<Phone> phones = new ArrayList<>();
+        if(phoneDTOS != null){
+            phoneDTOS.forEach(phoneDTO -> phones.add(new Phone(phoneDTO.getPhonenumber(), phoneDTO.getDescription())));
+        }
+        return phones;
     }
 
     public Integer getPhonenumber() {
