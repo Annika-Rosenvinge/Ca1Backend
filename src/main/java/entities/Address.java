@@ -14,9 +14,9 @@ import java.util.List;
 @Entity
 @Table(name = "ADDRESS")
 @NamedQueries({
-        @NamedQuery(name = "ADDRESS.getAllRows", query = "SELECT a from ADDRESS a"),
-        @NamedQuery(name = "ADDRESS.deleteAllRows", query = "DELETE FROM ADDRESS"),
-        @NamedQuery(name = "ADDRESS.getAddress", query = "SELECT a from ADDRESS a WHERE a.street = :street")
+        @NamedQuery(name = "ADDRESS.getAllRows", query = "SELECT a from Address a"),
+        @NamedQuery(name = "ADDRESS.deleteAllRows", query = "DELETE FROM Address"),
+        @NamedQuery(name = "ADDRESS.getAddress", query = "SELECT a from Address a WHERE a.street = :street")
         })
 
 public class Address implements Serializable {
@@ -30,8 +30,6 @@ public class Address implements Serializable {
     //rest of ADDRESS attributes
     @Column(name = "street", length = 150, nullable = false, unique = false)
     private String street;
-    @Column(name = "additionalinfo", length = 90, nullable = true, unique = false)
-    private String additionalInfo;
 
     @OneToMany (mappedBy = "address", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List <Person> persons;
@@ -43,22 +41,24 @@ public class Address implements Serializable {
     public Address(){
 
     }
-    public Address(String street, String additionalInfo){
+    public Address(String street){
         this.street = street;
-        this.additionalInfo = additionalInfo;
         this.cityInfo = null;
     }
 
-    public Address(String street, String additionalInfo, CityInfo cityInfo){
+    public Address(String street, CityInfo cityInfo){
         this.street = street;
-        this.additionalInfo = additionalInfo;
         this.cityInfo = cityInfo;
     }
 
     public Address (AddressDTO addressDTO){
         this.street = addressDTO.getStreet();
-        this.additionalInfo = addressDTO.getAdditionalInfo();
         this.cityInfo = new CityInfo(addressDTO.getCityInfoDTO());
+    }
+
+    public Address(String street, String zipcode){
+        this.street = street;
+        this.cityInfo = new CityInfo(zipcode, cityInfo.getCity());
     }
 
 
@@ -76,14 +76,6 @@ public class Address implements Serializable {
 
     public void setStreet(String street) {
         this.street = street;
-    }
-
-    public String getAdditionalInfo() {
-        return additionalInfo;
-    }
-
-    public void setAdditionalInfo(String additionalInfo) {
-        this.additionalInfo = additionalInfo;
     }
 
     public CityInfo getCityInfo() {
@@ -108,8 +100,6 @@ public class Address implements Serializable {
     public String toString() {
         return "Address{" +
                 "street: '" + street + '\'' +
-                ", additionalInfo: '" + additionalInfo + '\'' +
-                ", persons: " + persons +
                 ", cityInfo: " + cityInfo +
                 '}';
     }

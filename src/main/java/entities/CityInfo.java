@@ -13,9 +13,9 @@ import java.util.List;
 @Entity
 @Table (name = "CITYINFO")
 @NamedQueries({
-        @NamedQuery(name = "CITYINFO.deleteAllRows", query = "DELETE from CITYINFO"),
-        @NamedQuery(name = "CITYINFO.getCityInfo", query = "SELECT c from CITYINFO c WHERE c.zipcode = :zipcode"),
-        @NamedQuery(name = "CITYINFO.getAllRows", query = "SELECT c FROM CITYINFO c")
+        @NamedQuery(name = "CityInfo.deleteAllRows", query = "DELETE from CityInfo"),
+        @NamedQuery(name = "CityInfo.getCityInfo", query = "SELECT c from CityInfo c WHERE c.zipcode = :zipcode"),
+        @NamedQuery(name = "CityInfo.getAllRows", query = "SELECT c FROM CityInfo c")
 })
 
 

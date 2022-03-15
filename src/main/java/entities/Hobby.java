@@ -10,8 +10,8 @@ import java.util.List;
 @Entity
 @Table(name = "HOBBY")
 @NamedQueries({
-        @NamedQuery(name = "HOBBY.getAllRows", query = "SELECT h from HOBBY h"),
-        @NamedQuery(name = "HOBBY.deleteAllRows", query = "DELETE FROM HOBBY")
+        @NamedQuery(name = "HOBBY.getAllRows", query = "SELECT h from Hobby h"),
+        @NamedQuery(name = "HOBBY.deleteAllRows", query = "DELETE FROM Hobby")
 })
 public class Hobby implements Serializable {
     private static final long serialVersionUID = 1L;

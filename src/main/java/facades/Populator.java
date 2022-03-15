@@ -12,13 +12,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import utils.EMF_Creator;
 
-/**
- *
- * @author tha
- */
 public class Populator {
 
-    private static Person person1 = new Person ("Hans", "Pedersen", "HansElskerKo@gamil.com");
+    private static Person person1 = new Person ( "Hans", "Pedersen", "HansElskerKo@gamil.com");
     private static Person person2 =  new Person("Anna", "Andersen", "AnnaAnd@gmail.com");
     private static Person person3 = new Person("Kurt", "Mogenesen", "KM@minemail.dk");
     private static Person person4 = new Person ("Marianne", "Olafsen", "Marianne235@email.nu");
@@ -36,11 +32,11 @@ public class Populator {
     private static CityInfo cityInfo4 = new CityInfo("1000", "København K");
     private static CityInfo cityInfo5 = new CityInfo("3700", "Rønne");
 
-    private static Address address1 = new Address("Milevej 2", "2 th", cityInfo1);
-    private static Address address2 = new Address("Nybrovej 305","R-55", cityInfo2);
-    private static Address address3 = new Address("Adressevej 1","a", cityInfo3);
-    private static Address address4 = new Address("Jernbanevej 2", "", cityInfo4);
-    private static Address address5 = new Address("Godtgemt 3", "", cityInfo5);
+    private static Address address1 = new Address("Milevej 2", cityInfo1);
+    private static Address address2 = new Address("Nybrovej 305", cityInfo2);
+    private static Address address3 = new Address("Adressevej 1", cityInfo3);
+    private static Address address4 = new Address("Jernbanevej 2",  cityInfo4);
+    private static Address address5 = new Address("Godtgemt 3",  cityInfo5);
 
     private static Hobby hobby1 = new Hobby("Dans", "for alle", "indendørs", "www.dansdigihjel.dk");
     private static Hobby hobby2 = new Hobby("Svømmning","Voksen", "Udendørs", "www.vandhundene.dk");
@@ -56,22 +52,23 @@ public class Populator {
         try{
             em.getTransaction().begin();
 
-            //Person 1
-            //giv personen en hobby
-            person1.addHobby(hobby1);
-            //giv personen et nummer
-            person1.addPhone(phone1);
-            //giv addressen en city info og giv personen en adresse
+            //person1.addHobby(hobby1);
+            //person1.addPhone(phone1);
+
+            //em.persist(phone1);
+            //em.merge(phone1);
+
             em.persist(cityInfo1);
             em.persist(address1);
-            address1.setCityInfo(cityInfo1);
-            em.merge(address1);
             em.persist(person1);
-            person1.setAddress(address1);
-            em.merge(person1);
+
+            //em.merge(address1);
+
+            //person1.setAddress(address1);
+            //em.merge(person1);
 
             //Person
-            person2.addHobby(hobby2);
+            /*person2.addHobby(hobby2);
             //giv personen et nummer
             person2.addPhone(phone2);
             //giv addressen en city info og giv personen en adresse
@@ -120,7 +117,7 @@ public class Populator {
             em.merge(address5);
             em.persist(person5);
             person5.setAddress(address5);
-            em.merge(person5);
+            em.merge(person5);*/
 
             em.getTransaction().commit();
 

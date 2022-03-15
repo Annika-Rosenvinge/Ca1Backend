@@ -8,17 +8,19 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Table(name = "PERSON")
 @Entity
-@NamedQueries({
-        @NamedQuery(name = "Person.deleteAllRows", query = "DELETE from Person"),
-        @NamedQuery(name = "Person.getAllRows", query = "SELECT p from Person p")})
+//Hvad tabellen hedder, som skal bruges ved SELECT, DELETE ect
+@Table(name = "USER")
+/*@NamedQueries({
+        @NamedQuery(name = "USER.deleteAllRows", query = "DELETE from USER"),
+        @NamedQuery(name = "USER.getPerson", query = "SELECT u from USER u"),
+        @NamedQuery(name = "USER.getPersonById", query = "")
+})*/
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private Integer id;
+    @Column(name = "user_id", updatable = false, nullable = false)
+    private Long id;
     @Column(name = "firstname", nullable = false)
     private String firstname;
     @Column(name = "lastname", nullable = false)
@@ -47,7 +49,17 @@ public class Person {
         this.address = null;
     }
 
-    public Person(int id, String firstname, String lastname, String email, List<Phone> phoneList, Address address, List<Hobby> hobbies) {
+    public Person(Long id, String firstname, String lastname, String email) {
+        this.id = id;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.phoneList = new ArrayList<>();
+        this.hobbyList = new ArrayList<>();
+        this.address = null;
+    }
+
+    public Person(Long id, String firstname, String lastname, String email, List<Phone> phoneList, Address address, List<Hobby> hobbies) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -129,12 +141,8 @@ public class Person {
 
 
 
-    public Integer getId() {
+    public Long getId() {
         return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getEmail() {
