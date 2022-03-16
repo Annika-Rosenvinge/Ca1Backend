@@ -61,7 +61,7 @@ public class PersonResource {
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public String editPerson(@PathParam("id") Long id, String person) {
+    public String editPerson(@PathParam("id") Integer id, String person) {
         PersonDTO personDTO = GSON.fromJson(person, PersonDTO.class);
         personDTO.setId(id);
         PersonDTO newPersonDTO = FACADE.editPerson(personDTO);
@@ -72,7 +72,7 @@ public class PersonResource {
     @DELETE
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public String deletePerson(@PathParam("id") int id) {
+    public String deletePerson(@PathParam("id") Integer id) {
         PersonDTO newPersonDTO = FACADE.deletePersonById(id);
         return GSON.toJson(newPersonDTO);
     }
