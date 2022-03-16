@@ -182,6 +182,38 @@ public class PersonFacade implements IPersonFacade {
     }
 
     //UPDATE
+    public PersonDTO editPerson(PersonDTO personDTO) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Person person = em.find(Person.class, personDTO.getId());
+            person.setEmail(personDTO.getEmail());
+            person.setFirstname(personDTO.getFirstname());
+            person.setLastname(personDTO.getLastname());
+            person.setPhoneList(Phone.getEntites(personDTO.getPhoneList()));
+            person.setHobbyList(Hobby.getEntites(personDTO.getHobbyList()));
+            em.getTransaction().commit();
+            return new PersonDTO(person);
+        } finally {
+            em.close();
+        }
+    }
+
 
     //DELETE
+    public PersonDTO deletePersonById(int id) {
+        EntityManager em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            Person person = em.find(Person.class, id);
+            for (Phone phone : person.getPhoneList()) {
+                em.remove(phone);
+            }
+            em.remove(person);
+            em.getTransaction().commit();
+            return new PersonDTO(person);
+        } finally {
+            em.close();
+        }
+    }
 }

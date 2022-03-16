@@ -56,6 +56,17 @@ public class Address implements Serializable {
         this.cityInfo = new CityInfo(addressDTO.getCityInfoDTO());
     }
 
+    public static Address getEntity(AddressDTO addressDTO) {
+        if (addressDTO != null) {
+            CityInfo cityInfo = new CityInfo(addressDTO.getCityInfoDTO().getZipcode(), addressDTO.getCityInfoDTO().getCity());
+            Address address = new Address();
+            address.setCityInfo(cityInfo);
+            address.setStreet(addressDTO.getStreet());
+            return address;
+        }
+        return null;
+    }
+
 
     public Integer getId() {
         return id;

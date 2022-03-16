@@ -56,5 +56,25 @@ public class PersonResource {
         PersonDTO personDTO = FACADE.findPersonsById(id);
         return GSON.toJson(personDTO);
     }
+    
+    @Path("/edit/{id}")
+    @PUT
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public String editPerson(@PathParam("id") Long id, String person) {
+        PersonDTO personDTO = GSON.fromJson(person, PersonDTO.class);
+        personDTO.setId(id);
+        PersonDTO newPersonDTO = FACADE.editPerson(personDTO);
+        return GSON.toJson(newPersonDTO);
+    }
+
+    @Path("/delete/{id}")
+    @DELETE
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    public String deletePerson(@PathParam("id") int id) {
+        PersonDTO newPersonDTO = FACADE.deletePersonById(id);
+        return GSON.toJson(newPersonDTO);
+    }
 
 }
