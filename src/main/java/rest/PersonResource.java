@@ -56,7 +56,7 @@ public class PersonResource {
         PersonDTO personDTO = FACADE.findPersonsById(id);
         return GSON.toJson(personDTO);
     }
-    
+
     @Path("/edit/{id}")
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
