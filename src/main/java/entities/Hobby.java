@@ -51,6 +51,14 @@ public class Hobby implements Serializable {
         this.persons = new ArrayList<>();
     }
 
+    public static List<Hobby> getEntites(List<HobbyDTO> hobbyDTOS) {
+        List<Hobby> hobbies = new ArrayList<>();
+        if(hobbyDTOS != null){
+            hobbyDTOS.forEach(hobbyDTO -> hobbies.add(new Hobby(hobbyDTO.getName(), hobbyDTO.getWikiLink(), hobbyDTO.getCategory(), hobbyDTO.getType())));
+        }
+        return hobbies;
+    }
+
     public String getName() {
         return name;
     }

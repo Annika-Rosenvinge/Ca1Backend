@@ -6,7 +6,11 @@ package entities;
 import dtos.PhoneDTO;
 
 import javax.persistence.*;
+import java.awt.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Entity
 //Bemærk at denne her er skrevet med lille efter det første bogstav, i know, ikke det smarteste men nu er det sådan her
@@ -46,6 +50,14 @@ public class Phone implements Serializable {
     public Phone (PhoneDTO phoneDTO){
         this.phonenumber = phoneDTO.getPhonenumber();
         this.info = phoneDTO.getDescription();
+    }
+
+    public static java.util.List<Phone> getEntites(java.util.List<PhoneDTO> phoneDTOS) {
+        List<Phone> phones = new ArrayList<>();
+        if(phoneDTOS != null){
+            phoneDTOS.forEach(phoneDTO -> phones.add(new Phone(phoneDTO.getPhonenumber(), phoneDTO.getDescription())));
+        }
+        return phones;
     }
 
     public Integer getPhonenumber() {
