@@ -12,8 +12,8 @@ import java.util.List;
 @Table(name = "Person")
 @NamedQueries({
         @NamedQuery(name = "PERSON.deleteAllRows", query = "DELETE from Person"),
-        @NamedQuery(name = "PERSON.getAllRows", query = "SELECT p from Person p")
-        //@NamedQuery(name = "USER.getPersonById", query = "")
+        @NamedQuery(name = "PERSON.getAllRows", query = "SELECT p from Person p"),
+        @NamedQuery(name = "PERSON.deleteById", query = "DELETE FROM Person p WHERE p.id = :id")
 })
 public class Person {
     @Id

@@ -206,6 +206,7 @@ public class PersonFacade implements IPersonFacade {
     }
 
     //EDIT ADDRESS
+    //ikke testet
     public synchronized PersonDTO editAddress(Integer id, AddressDTO addressDTO){
         EntityManager em = emf.createEntityManager();
 
@@ -235,16 +236,19 @@ public class PersonFacade implements IPersonFacade {
     }
 
     //UPDATE
+    //ikke testet
     public PersonDTO editPerson(PersonDTO personDTO) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
+
             Person person = em.find(Person.class, personDTO.getId());
             person.setEmail(personDTO.getEmail());
             person.setFirstname(personDTO.getFirstname());
             person.setLastname(personDTO.getLastname());
             person.setPhoneList(Phone.getEntites(personDTO.getPhoneList()));
             person.setHobbyList(Hobby.getEntites(personDTO.getHobbyList()));
+
             em.getTransaction().commit();
             return new PersonDTO(person);
         } finally {
@@ -254,20 +258,20 @@ public class PersonFacade implements IPersonFacade {
 
 
     //DELETE
+    //ikke testet
     public PersonDTO deletePersonById(Integer id) {
         EntityManager em = getEntityManager();
         try {
             em.getTransaction().begin();
             Person person = em.find(Person.class, id);
-            for (Phone phone : person.getPhoneList()) {
-                em.remove(phone);
-            }
-            em.remove(person);
+            em.createNamedQuery("PERSON.deleteById").setParameter("id", id).executeUpdate();
             em.getTransaction().commit();
             return new PersonDTO(person);
         } finally {
             em.close();
         }
     }
+
+
 
 }

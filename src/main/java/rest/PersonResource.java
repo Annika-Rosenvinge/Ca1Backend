@@ -4,11 +4,15 @@ package rest;
 //og efter endpoint er lavet så skal der laves test i PersonResourceTest
 
 import com.google.gson.*;
+import dtos.AddressDTO;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
+import dtos.PhoneDTO;
+import entities.Phone;
 import facades.PersonFacade;
 import utils.EMF_Creator;
 
+import javax.faces.component.PartialStateHolder;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -46,14 +50,17 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String findAllPersons(){
         PersonsDTO personsDTO = FACADE.findAllPersons();
+        
         return GSON.toJson(personsDTO);
     }
 
     @Path("/{id}")
+    //person facade test virker
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public String findPersonById(@PathParam("id") Integer id){
         PersonDTO personDTO = FACADE.findPersonById(id);
+
         return GSON.toJson(personDTO);
     }
 
@@ -65,7 +72,20 @@ public class PersonResource {
         PersonDTO personDTO = GSON.fromJson(person, PersonDTO.class);
         personDTO.setId(id);
         PersonDTO newPersonDTO = FACADE.editPerson(personDTO);
+
         return GSON.toJson(newPersonDTO);
+    }
+
+
+    @Path("/editphone/{id}")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String editphone(@PathParam("id") Integer id, String phone){
+        PhoneDTO phoneDTO = GSON.fromJson(phone, PhoneDTO.class);
+        PersonDTO personDTO = FACADE.editPhone(id, phoneDTO);
+
+        return GSON.toJson(personDTO);
     }
 
     @Path("/delete/{id}")
@@ -74,7 +94,20 @@ public class PersonResource {
     @Consumes({MediaType.APPLICATION_JSON})
     public String deletePerson(@PathParam("id") Integer id) {
         PersonDTO newPersonDTO = FACADE.deletePersonById(id);
+
         return GSON.toJson(newPersonDTO);
+    }
+
+    @Path("/editaddress/{id}")
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String editaddress(@PathParam("id") Integer id, String address){
+        AddressDTO addressDTO = GSON.fromJson(address, AddressDTO.class);
+        PersonDTO personDTO = FACADE.editAddress(id, addressDTO);
+
+        return GSON.toJson(personDTO);
+
     }
 
 }
