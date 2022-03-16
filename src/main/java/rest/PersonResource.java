@@ -12,7 +12,7 @@ import utils.EMF_Creator;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.awt.*;
+
 
 //Det her er hvad der kommer efter /api
 //så denne her er www.arosenvinge.dk/ca1backend/api/person, alle de andre endpoints kommer efter /person
@@ -52,8 +52,8 @@ public class PersonResource {
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String findPersonById(@PathParam("id") Long id){
-        PersonDTO personDTO = FACADE.findPersonsById(id);
+    public String findPersonById(@PathParam("id") Integer id){
+        PersonDTO personDTO = FACADE.findPersonById(id);
         return GSON.toJson(personDTO);
     }
 

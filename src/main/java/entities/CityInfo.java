@@ -11,7 +11,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table (name = "CITYINFO")
+@Table (name = "CityInfo")
 @NamedQueries({
         @NamedQuery(name = "CITYINFO.deleteAllRows", query = "DELETE from CityInfo"),
         @NamedQuery(name = "CITYINFO.getCityInfo", query = "SELECT c from CityInfo c WHERE c.zipcode = :zipcode"),
@@ -22,7 +22,7 @@ import java.util.List;
 public class CityInfo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(name = "zipcode", length = 10, unique = true, nullable = false)
+    @Column(name = "zipcode", length = 10, nullable = false, updatable = true)
     private String zipcode;
     @Column(name = "city", length=90, unique = false)
     private String city;

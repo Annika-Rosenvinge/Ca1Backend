@@ -64,7 +64,7 @@ public class PersonFacadeTest {
         em.getTransaction().begin();
         em.createNamedQuery("PHONE.deleteAllRows",Phone.class).executeUpdate();
         em.createNamedQuery("HOBBY.deleteAllRows", Hobby.class).executeUpdate();
-        em.createNamedQuery("USER.deleteAllRows", Person.class).executeUpdate();
+        em.createNamedQuery("PERSON.deleteAllRows", Person.class).executeUpdate();
         em.createNamedQuery("ADDRESS.deleteAllRows", Address.class).executeUpdate();
         em.createNamedQuery("CITYINFO.deleteAllRows", CityInfo.class).executeUpdate();
         em.getTransaction().commit();
@@ -181,13 +181,41 @@ public class PersonFacadeTest {
 
     @Test
     void findPersonById(){
-       Long id = person1.getId();
-       PersonDTO result = testFacade.findPersonsById(id);
+       Integer id = person1.getId();
+       PersonDTO result = testFacade.findPersonById(id);
        System.out.println("expected: " + person1.getId() + " result: " + result.getId());
        assertEquals(person1.getId(), result.getId());
 
     }
 
+    @Test
+    //virker men beskrivelsen kommer ikke med
+    void editPhone(){
+        Phone phone = new Phone(81264081, "private");
+        PhoneDTO newPhone = new PhoneDTO(phone);
+
+        Integer id = person1.getId();
+        PersonDTO result = testFacade.editPhone(id, newPhone);
+
+        List <PhoneDTO> expResult = new ArrayList<>();
+        expResult.add(newPhone);
+
+        assertEquals(expResult, result.getPhoneList());
+
+    }
+
+    @Test
+    //virker ikke
+    void editAddress(){
+        //Address address = new Address("Svalevænget 2", cityInfo2);
+        CityInfoDTO cityInfoDTO = new CityInfoDTO(cityInfo2);
+        AddressDTO newAddress = new AddressDTO("Svalevænget 2", cityInfoDTO);
+
+        Integer id = person3.getId();
+        PersonDTO result = testFacade.editAddress(id, newAddress);
+
+        assertEquals(newAddress, result.getAddressDTO());
+    }
 
 
 

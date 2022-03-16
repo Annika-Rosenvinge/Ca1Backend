@@ -1,8 +1,6 @@
 package facades;
 
-import dtos.HobbyDTO;
-import dtos.PersonDTO;
-import dtos.PersonsDTO;
+import dtos.*;
 import entities.*;
 import utils.Utility;
 
@@ -73,7 +71,7 @@ public class PersonFacade implements IPersonFacade {
             em.close();
         }
     }
-
+    //Skal testes
     public HobbyDTO createHobby(String name, String link, String type, String category) {
         EntityManager em = emf.createEntityManager();
         Hobby hobby = new Hobby();
@@ -163,7 +161,7 @@ public class PersonFacade implements IPersonFacade {
     }
 
     //FIND ONE - test og endpoint er lavet
-    public PersonDTO findPersonsById(Long id){
+    public PersonDTO findPersonById(Integer id){
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
@@ -181,7 +179,62 @@ public class PersonFacade implements IPersonFacade {
 
     }
 
-    //UPDATE
+    //UPDATE NAME
 
     //DELETE
+
+    //EDIT PHONE
+    //beskrivelsen kommer ikke med af den ene eller anden årsag, måske skal det kigges på
+    public synchronized PersonDTO editPhone(Integer id, PhoneDTO phoneDTO){
+        EntityManager em = emf.createEntityManager();
+
+        Person updPerson = em.find(Person.class, id);
+        List<Phone> phones = updPerson.getPhoneList();
+
+        Phone newPhone = new Phone(phoneDTO);
+        phones.set(phones.size()-1,newPhone);
+
+        try{
+            em.getTransaction().begin();
+
+            updPerson.setPhoneList(phones);
+            em.merge(updPerson);
+
+            em.getTransaction().commit();
+
+            return new PersonDTO(updPerson);
+        }finally {
+            em.close();
+        }
+
+    }
+
+    //EDIT ADDRESS
+    public synchronized PersonDTO editAddress(Integer id, AddressDTO addressDTO){
+        EntityManager em = emf.createEntityManager();
+
+        Person updPerson = em.find(Person.class, id);
+        Address currentAdd = updPerson.getAddress();
+        CityInfo currentCity = updPerson.getAddress().getCityInfo();
+
+        currentAdd.setStreet(addressDTO.getStreet());
+
+        currentCity.setCity(addressDTO.getCity());
+        currentCity.setZipcode(addressDTO.getZipcode());
+
+        try{
+            em.getTransaction().begin();
+
+            currentAdd.setCityInfo(currentCity);
+            updPerson.setAddress(currentAdd);
+            em.merge(updPerson);
+
+            em.getTransaction().commit();
+
+            return new PersonDTO(updPerson);
+        }finally {
+            em.close();
+        }
+
+    }
 }

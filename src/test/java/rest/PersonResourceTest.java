@@ -64,7 +64,7 @@ public class PersonResourceTest {
             em.getTransaction().begin();
             em.createNamedQuery("PHONE.deleteAllRows", Phone.class).executeUpdate();
             em.createNamedQuery("HOBBY.deleteAllRows", Hobby.class).executeUpdate();
-            em.createNamedQuery("USER.deleteAllRows", Person.class).executeUpdate();
+            em.createNamedQuery("PERSON.deleteAllRows", Person.class).executeUpdate();
             em.createNamedQuery("ADDRESS.deleteAllRows", Address.class).executeUpdate();
             em.createNamedQuery("CITYINFO.deleteAllRows", CityInfo.class).executeUpdate();
 

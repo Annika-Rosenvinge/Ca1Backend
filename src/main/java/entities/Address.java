@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "ADDRESS")
+@Table(name = "Address")
 @NamedQueries({
         @NamedQuery(name = "ADDRESS.getAllRows", query = "SELECT a from Address a"),
         @NamedQuery(name = "ADDRESS.deleteAllRows", query = "DELETE FROM Address"),

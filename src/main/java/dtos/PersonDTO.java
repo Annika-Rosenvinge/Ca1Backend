@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class PersonDTO {
-    private Long id;
+    private Integer id;
     private String firstname;
     private String lastname;
     private String email;
@@ -60,11 +60,11 @@ public class PersonDTO {
         this.lastname = lastname;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

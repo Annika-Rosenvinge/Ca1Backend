@@ -9,17 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "Person")
 @NamedQueries({
-        @NamedQuery(name = "USER.deleteAllRows", query = "DELETE from Person"),
-        @NamedQuery(name = "USER.getAllRows", query = "SELECT p from Person p")
+        @NamedQuery(name = "PERSON.deleteAllRows", query = "DELETE from Person"),
+        @NamedQuery(name = "PERSON.getAllRows", query = "SELECT p from Person p")
         //@NamedQuery(name = "USER.getPersonById", query = "")
 })
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", updatable = false, nullable = false)
-    private Long id;
+    private Integer id;
     @Column(name = "firstname", nullable = false)
     private String firstname;
     @Column(name = "lastname", nullable = false)
@@ -48,7 +48,7 @@ public class Person {
         this.address = null;
     }
 
-    public Person(Long id, String firstname, String lastname, String email) {
+    public Person(Integer id, String firstname, String lastname, String email) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -58,7 +58,7 @@ public class Person {
         this.address = null;
     }
 
-    public Person(Long id, String firstname, String lastname, String email, List<Phone> phoneList, Address address, List<Hobby> hobbies) {
+    public Person(Integer id, String firstname, String lastname, String email, List<Phone> phoneList, Address address, List<Hobby> hobbies) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -140,7 +140,7 @@ public class Person {
 
 
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -192,7 +192,7 @@ public class Person {
         this.hobbyList = hobbyList;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
