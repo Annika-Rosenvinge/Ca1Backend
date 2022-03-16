@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class PersonDTO {
-    private Long id;
+    private int id;
     private String firstname;
     private String lastname;
     private String email;
@@ -60,11 +60,11 @@ public class PersonDTO {
         this.lastname = lastname;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -84,9 +84,7 @@ public class PersonDTO {
         this.hobbyList = hobbyList;
     }
 
-    public AddressDTO getAddressDTO() {
-        return addressDTO;
-    }
+    public AddressDTO getAddressDTO() { return addressDTO; }
 
     public void setAddressDTO(AddressDTO addressDTO) {
         this.addressDTO = addressDTO;

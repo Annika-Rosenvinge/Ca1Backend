@@ -52,7 +52,7 @@ public class PersonResource {
     @Path("/{id}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String findPersonById(@PathParam("id") Long id){
+    public String findPersonById(@PathParam("id") int id){
         PersonDTO personDTO = FACADE.findPersonsById(id);
         return GSON.toJson(personDTO);
     }
@@ -61,7 +61,7 @@ public class PersonResource {
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON})
-    public String editPerson(@PathParam("id") Long id, String person) {
+    public String editPerson(@PathParam("id") int id, String person) {
         PersonDTO personDTO = GSON.fromJson(person, PersonDTO.class);
         personDTO.setId(id);
         PersonDTO newPersonDTO = FACADE.editPerson(personDTO);

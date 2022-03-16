@@ -38,11 +38,11 @@ public class PersonFacadeTest {
     private static Address address3 = new Address( "Hovedvejen", cityInfo3);
     private static Address address4 = new Address ("Mile alle 23", cityInfo1 );
 
-    private static Hobby hobby1 = new Hobby("Golf", "ball", "outdoor", "www.golf.dk");
+   /* private static Hobby hobby1 = new Hobby("Golf", "ball", "outdoor", "www.golf.dk");
     private static Hobby hobby2 = new Hobby("Dans", "Kropsbevægelse", "Indendørs", "Dansmedos.dk");
     private static Hobby hobby3 = new Hobby("Løb", "Kropsbevægelse", "Udendørs", "www.løb.dk");
     private static Hobby hobby4 = new Hobby("Crossfit", "Idioti", "Indendørs", " ");
-
+*/
     public PersonFacadeTest(){
 
     }
@@ -72,13 +72,13 @@ public class PersonFacadeTest {
         try{
             em.getTransaction().begin();
             //personer gives hobby og telefon nummer først
-            person1.addHobby(hobby1);
+            //person1.addHobby(hobby1);
             person1.addPhone(phone1);
-            person2.addHobby(hobby2);
+            //person2.addHobby(hobby2);
             person2.addPhone(phone2);
-            person3.addHobby(hobby3);
+            //person3.addHobby(hobby3);
             person3.addPhone(phone3);
-            person4.addHobby(hobby4);
+            //person4.addHobby(hobby4);
             person4.addPhone(phone4);
 
             //nu gives de adresser en efter en
@@ -134,7 +134,7 @@ public class PersonFacadeTest {
         Phone phone = new Phone(63917428, "privat");
 
         ArrayList<Hobby> hobbyList = new ArrayList();
-        hobbyList.add(hobby4);
+        //hobbyList.add(hobby4);
 
         person.setAddress(address);
         person.addPhone(phone);
@@ -181,13 +181,31 @@ public class PersonFacadeTest {
 
     @Test
     void findPersonById(){
-       Long id = person1.getId();
+       int id = person1.getId();
        PersonDTO result = testFacade.findPersonsById(id);
        System.out.println("expected: " + person1.getId() + " result: " + result.getId());
        assertEquals(person1.getId(), result.getId());
 
     }
 
+    @Test
+    void editPerson() {
+        PersonDTO personDTO = testFacade.getPersonById(person2.getId());
+        String newFirstname = "Lotte";
+        Person person = new Person(personDTO.getId(), newFirstname, personDTO.getLastname(), personDTO.getEmail() );
+        person.setAddress(Address.getEntity(personDTO.getAddressDTO()));
+        PersonDTO newPersonDTO = new PersonDTO(person);
+        String expected = "Lotte";
+        String actual = testFacade.editPerson(newPersonDTO).getFirstname();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void deletePersonById() {
+        String expected = person3.getLastname();
+        String actual = testFacade.deletePersonById(person3.getId()).getLastname();
+        assertEquals(expected, actual);
+    }
 
 
 
