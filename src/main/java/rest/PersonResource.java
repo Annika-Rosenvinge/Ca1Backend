@@ -68,7 +68,7 @@ public class PersonResource {
     }
 
     @Path("/addhobby/{id}")
-    @POST
+    @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public String addHobby(@PathParam("id")int id, String person, String hobby){
