@@ -1,8 +1,6 @@
 package facades;
 
-import dtos.HobbyDTO;
-import dtos.PersonDTO;
-import dtos.PersonsDTO;
+import dtos.*;
 import entities.*;
 import utils.Utility;
 
@@ -179,6 +177,41 @@ public class PersonFacade implements IPersonFacade {
             return null;
         }
 
+    }
+
+    public CityInfosDTO findAllZipCodes(){
+        EntityManager em = emf.createEntityManager();
+
+        try {
+            em.getTransaction().begin();
+            TypedQuery <CityInfo> query = em.createNamedQuery("CITYINFO.getAllRows", CityInfo.class);
+            List<CityInfo> allZipcodes = query.getResultList();
+            CityInfosDTO cityInfosDTO = new CityInfosDTO(allZipcodes);
+            em.getTransaction().commit();
+
+            return cityInfosDTO;
+        }finally {
+            em.close();
+        }
+
+    }
+
+    public synchronized PersonDTO addHobby(int id, String hobbyName){
+        EntityManager em = emf.createEntityManager();
+        Person person = em.find(Person.class, id);
+        try {
+            em.getTransaction().begin();
+            TypedQuery <Hobby> query = em.createQuery("SELECT h FROM Hobby h WHERE h.name = ;name", Hobby.class);
+            query.setParameter("name", hobbyName);
+            Hobby hobby = query.getSingleResult();
+            person.addHobby(hobby);
+            em.merge(person);
+            em.getTransaction().commit();
+
+            return new PersonDTO(person);
+        }finally {
+            em.close();
+        }
     }
 
     //UPDATE

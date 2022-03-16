@@ -4,6 +4,8 @@ package rest;
 //og efter endpoint er lavet så skal der laves test i PersonResourceTest
 
 import com.google.gson.*;
+import dtos.CityInfosDTO;
+import dtos.HobbyDTO;
 import dtos.PersonDTO;
 import dtos.PersonsDTO;
 import facades.PersonFacade;
@@ -55,6 +57,26 @@ public class PersonResource {
     public String findPersonById(@PathParam("id") Long id){
         PersonDTO personDTO = FACADE.findPersonsById(id);
         return GSON.toJson(personDTO);
+    }
+
+    @Path("/allzipcode")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public String findAllZipCodes(){
+        CityInfosDTO cityInfosDTO = FACADE.findAllZipCodes();
+        return GSON.toJson(cityInfosDTO);
+    }
+
+    @Path("/addhobby/{id}")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String addHobby(@PathParam("id")int id, String person, String hobby){
+        PersonDTO personDTO = GSON.fromJson(person, PersonDTO.class);
+        personDTO.setId(id);
+        PersonDTO newPersonDTO = FACADE.addHobby(id, hobby);
+
+        return GSON.toJson(newPersonDTO);
     }
 
 }
