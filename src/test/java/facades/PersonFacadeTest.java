@@ -38,11 +38,11 @@ public class PersonFacadeTest {
     private static Address address3 = new Address( "Hovedvejen", cityInfo3);
     private static Address address4 = new Address ("Mile alle 23", cityInfo1 );
 
-    private static Hobby hobby1 = new Hobby("Golf", "ball", "outdoor", "www.golf.dk");
+   /* private static Hobby hobby1 = new Hobby("Golf", "ball", "outdoor", "www.golf.dk");
     private static Hobby hobby2 = new Hobby("Dans", "Kropsbevægelse", "Indendørs", "Dansmedos.dk");
     private static Hobby hobby3 = new Hobby("Løb", "Kropsbevægelse", "Udendørs", "www.løb.dk");
     private static Hobby hobby4 = new Hobby("Crossfit", "Idioti", "Indendørs", " ");
-
+*/
     public PersonFacadeTest(){
 
     }
@@ -134,7 +134,7 @@ public class PersonFacadeTest {
         Phone phone = new Phone(63917428, "privat");
 
         ArrayList<Hobby> hobbyList = new ArrayList();
-        hobbyList.add(hobby4);
+        //hobbyList.add(hobby4);
 
         person.setAddress(address);
         person.addPhone(phone);
@@ -189,36 +189,24 @@ public class PersonFacadeTest {
 
     }
 
-    /*@Test
-    //virker men beskrivelsen kommer ikke med
-    void editPhone(){
-        Phone phone = new Phone(81264081, "private");
-        PhoneDTO newPhone = new PhoneDTO(phone);
-
-        Integer id = person1.getId();
-        PersonDTO result = testFacade.editPhone(id, newPhone);
-
-        List <PhoneDTO> expResult = new ArrayList<>();
-        expResult.add(newPhone);
-
-        assertEquals(expResult, result.getPhoneList());
-
+    @Test
+    void editPerson() {
+        PersonDTO personDTO = testFacade.getPersonById(person2.getId());
+        String newFirstname = "Lotte";
+        Person person = new Person(personDTO.getId(), newFirstname, personDTO.getLastname(), personDTO.getEmail() );
+        person.setAddress(Address.getEntity(personDTO.getAddressDTO()));
+        PersonDTO newPersonDTO = new PersonDTO(person);
+        String expected = "Lotte";
+        String actual = testFacade.editPerson(newPersonDTO).getFirstname();
+        assertEquals(expected, actual);
     }
 
     @Test
-    //virker ikke
-    void editAddress(){
-        //Address address = new Address("Svalevænget 2", cityInfo2);
-        CityInfoDTO cityInfoDTO = new CityInfoDTO(cityInfo2);
-        AddressDTO newAddress = new AddressDTO("Svalevænget 2", cityInfoDTO);
-
-        Integer id = person3.getId();
-        PersonDTO result = testFacade.editAddress(id, newAddress);
-
-        assertEquals(newAddress, result.getAddressDTO());
-    }*/
-
-    //Test mangler
+    void deletePersonById() {
+        String expected = person3.getLastname();
+        String actual = testFacade.deletePersonById(person3.getId()).getLastname();
+        assertEquals(expected, actual);
+    }
 
 
 

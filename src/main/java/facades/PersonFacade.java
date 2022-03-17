@@ -29,6 +29,17 @@ public class PersonFacade implements IPersonFacade {
     private EntityManager getEntityManager(){
         return emf.createEntityManager();
     }
+
+    public PersonDTO getPersonById(int id) {
+        EntityManager em = getEntityManager();
+        try {
+            Person person = em.find(Person.class, id);
+            return new PersonDTO(person);
+        } finally {
+            em.close();
+        }
+    }
+
     //mindre metoder til de større
     //Checker om email er i brug hos en anden bruger
     private boolean emailTaken(PersonDTO personDTO){

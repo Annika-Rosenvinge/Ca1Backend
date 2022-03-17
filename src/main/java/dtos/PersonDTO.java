@@ -84,9 +84,7 @@ public class PersonDTO {
         this.hobbyList = hobbyList;
     }
 
-    public AddressDTO getAddressDTO() {
-        return addressDTO;
-    }
+    public AddressDTO getAddressDTO() { return addressDTO; }
 
     public void setAddressDTO(AddressDTO addressDTO) {
         this.addressDTO = addressDTO;
