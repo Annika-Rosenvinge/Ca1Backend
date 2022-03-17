@@ -115,7 +115,7 @@ public class PersonResource {
         return GSON.toJson(cityInfosDTO);
     }
 
-    @Path("/addhobby/{id}")
+    /*@Path("/addhobby/{id}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
@@ -125,6 +125,6 @@ public class PersonResource {
         PersonDTO newPersonDTO = FACADE.addHobby(id, hobby);
 
         return GSON.toJson(newPersonDTO);
-    }
+    }*/
 
 }
