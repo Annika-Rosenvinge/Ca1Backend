@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+@Disabled
 public class PersonFacadeTest {
     private static EntityManagerFactory emf;
     private static PersonFacade testFacade;
