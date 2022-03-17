@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+//hej
+
 
 @Entity
 //Bemærk at denne her er skrevet med lille efter det første bogstav, i know, ikke det smarteste men nu er det sådan her

@@ -155,7 +155,7 @@ public class Populator {
             em.persist(address10);
             em.persist(person10);
             em.merge(person10);
-            
+
             em.getTransaction().commit();
 
         } finally {
