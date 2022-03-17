@@ -208,6 +208,36 @@ public class PersonFacadeTest {
         assertEquals(expected, actual);
     }
 
+    /*@Test
+    //virker men beskrivelsen kommer ikke med
+    void editPhone(){
+        Phone phone = new Phone(81264081, "private");
+        PhoneDTO newPhone = new PhoneDTO(phone);
+
+        Integer id = person1.getId();
+        PersonDTO result = testFacade.editPhone(id, newPhone);
+
+        List <PhoneDTO> expResult = new ArrayList<>();
+        expResult.add(newPhone);
+
+        assertEquals(expResult, result.getPhoneList());
+
+    }
+
+    @Test
+    //virker ikke
+    void editAddress(){
+        //Address address = new Address("Svalevænget 2", cityInfo2);
+        CityInfoDTO cityInfoDTO = new CityInfoDTO(cityInfo2);
+        AddressDTO newAddress = new AddressDTO("Svalevænget 2", cityInfoDTO);
+
+        Integer id = person3.getId();
+        PersonDTO result = testFacade.editAddress(id, newAddress);
+
+        assertEquals(newAddress, result.getAddressDTO());
+    }*/
+
+    //Test mangler
 
 
 }
