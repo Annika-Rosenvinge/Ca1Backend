@@ -18,6 +18,7 @@ public class CorsFilter implements ContainerRequestFilter, ContainerResponseFilt
 
         //If it's a preflight request, abort the request with a 200 status, and the CORS headers are added in the
         // response filter method below.
+
         if (isPreflightRequest(request)) {
             request.abortWith(Response.ok().build());
             return;
@@ -49,8 +50,10 @@ public class CorsFilter implements ContainerRequestFilter, ContainerResponseFilt
                     "Origin, Accept, Content-Type, Authorization,x-access-token");
         }
 
-    /* Cross origin requests can be either simple requests or preflight request. We need to add this
+
+        /* Cross origin requests can be either simple requests or preflight request. We need to add this
      header to both types of requests. Only preflight requests need the previously added headers. */
+        
         response.getHeaders().add("Access-Control-Allow-Origin", "*");
     }
 }
