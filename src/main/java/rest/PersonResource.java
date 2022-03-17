@@ -50,7 +50,7 @@ public class PersonResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String findAllPersons(){
         PersonsDTO personsDTO = FACADE.findAllPersons();
-        
+
         return GSON.toJson(personsDTO);
     }
 
