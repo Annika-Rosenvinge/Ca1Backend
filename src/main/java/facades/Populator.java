@@ -155,23 +155,7 @@ public class Populator {
             em.persist(address10);
             em.persist(person10);
             em.merge(person10);
-
-            /*//person1.addHobby(hobby1);
-            //person1.addPhone(phone1);
-
-            //em.persist(phone1);
-            //em.merge(phone1);
-
-            em.persist(cityInfo1);
-            em.persist(address1);
-            em.persist(person1);
-
-            //em.merge(address1);
-
-            //person1.setAddress(address1);
-            //em.merge(person1);*/
-
-
+            
             em.getTransaction().commit();
 
         } finally {
