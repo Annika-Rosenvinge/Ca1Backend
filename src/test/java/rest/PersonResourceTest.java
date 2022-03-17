@@ -97,7 +97,7 @@ public class PersonResourceTest {
         httpServer.shutdownNow();
     }
 
-    @Test
+    /*@Test
     void createPerson(){
 
     }
@@ -105,7 +105,7 @@ public class PersonResourceTest {
     @Test
     void findAllPersons(){
 
-    }
+    }*/
 
 
     /*@Test
