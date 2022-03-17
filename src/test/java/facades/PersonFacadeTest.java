@@ -234,8 +234,35 @@ public class PersonFacadeTest {
         Integer id = person3.getId();
         PersonDTO result = testFacade.editAddress(id, newAddress);
 
-        assertEquals(newAddress, result.getAddressDTO());
-    }*/
+        assertEquals(newAddress, result.getAddressDTO());}
+
+    }
+    //virker
+    @Test
+    void findAllZipCodes(){
+        EntityManager em = emf.createEntityManager();
+        List <CityInfo> cityInfos = new ArrayList<>();
+        cityInfos.add(cityInfo1);
+        cityInfos.add(cityInfo2);
+        cityInfos.add(cityInfo3);
+
+        CityInfosDTO expectedResult = new CityInfosDTO(cityInfos);
+        try {
+            em.getTransaction().begin();
+            CityInfosDTO result = testFacade.findAllZipCodes();
+            em.getTransaction().commit();
+
+            assertEquals(expectedResult.getAll().size(), result.getAll().size());
+        } finally {
+            em.close();
+        }
+    }
+
+    /*@Test
+    void addHobby(){
+        int id = person1.getId();
+      }
+    */
 
     //Test mangler
 
