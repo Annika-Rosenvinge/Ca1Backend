@@ -16,7 +16,8 @@ public class CorsFilter implements ContainerResponseFilter {
     @Override
     public void filter(ContainerRequestContext containerRequestContext,
                        ContainerResponseContext containerResponseContext) throws IOException {
-
+        containerResponseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
+        
         if (containerRequestContext.getHeaderString("Origin") == null){
             return;
         }
@@ -30,7 +31,7 @@ public class CorsFilter implements ContainerResponseFilter {
 
         }
         //This one must always be present
-        containerResponseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
+
     }
 }
 
