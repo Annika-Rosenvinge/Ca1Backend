@@ -49,6 +49,7 @@ public class PersonResource {
         PersonsDTO personsDTO = FACADE.findAllPersons();
 
         return GSON.toJson(personsDTO);
+
     }
 
     @Path("/{id}")

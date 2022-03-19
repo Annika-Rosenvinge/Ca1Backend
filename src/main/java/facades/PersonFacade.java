@@ -198,13 +198,17 @@ public class PersonFacade implements IPersonFacade {
         Person updPerson = em.find(Person.class, id);
         List<Phone> phones = updPerson.getPhoneList();
 
+        //tjek om tlfnr er det som skal udskiftes
+
         Phone newPhone = new Phone(phoneDTO);
+        //add phone i stedet for at fjerne den sidste.
         phones.set(phones.size()-1,newPhone);
 
         try{
             em.getTransaction().begin();
 
             updPerson.setPhoneList(phones);
+            //sæt person på telefon
             em.merge(updPerson);
 
             em.getTransaction().commit();

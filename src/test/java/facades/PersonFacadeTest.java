@@ -208,7 +208,7 @@ public class PersonFacadeTest {
         assertEquals(expected, actual);
     }
 
-    /*@Test
+    @Test
     //virker men beskrivelsen kommer ikke med
     void editPhone(){
         Phone phone = new Phone(81264081, "private");
@@ -224,7 +224,7 @@ public class PersonFacadeTest {
 
     }
 
-    @Test
+    //@Test
     //virker ikke
     void editAddress(){
         //Address address = new Address("Svalevænget 2", cityInfo2);
@@ -234,7 +234,7 @@ public class PersonFacadeTest {
         Integer id = person3.getId();
         PersonDTO result = testFacade.editAddress(id, newAddress);
 
-        assertEquals(newAddress, result.getAddressDTO());}
+        assertEquals(newAddress, result.getAddressDTO());
 
     }
     //virker
