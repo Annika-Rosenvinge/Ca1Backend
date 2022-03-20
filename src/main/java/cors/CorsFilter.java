@@ -16,8 +16,10 @@ public class CorsFilter implements ContainerResponseFilter {
     @Override
     public void filter(ContainerRequestContext containerRequestContext,
                        ContainerResponseContext containerResponseContext) throws IOException {
+        //This one must always be present
         containerResponseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
-        
+
+        containerRequestContext.getHeaders().add("Access-Control-Allow-Origin", "*");
         if (containerRequestContext.getHeaderString("Origin") == null){
             return;
         }
@@ -27,10 +29,10 @@ public class CorsFilter implements ContainerResponseFilter {
             // Whatever other non-standard/safe headers (see list above)
             // you want the client to be able to send to the server,
             // put it in this list (v:). And remove the ones you don't want.
-            containerResponseContext.getHeaders().add("Access-Control-Allow-Headers", "Origin, Accept, Content-Type, Authorization,x-access-token");
+            containerResponseContext.getHeaders().add("Access-Control-Allow-Headers", "Origin, Accept, Content-Type, Authorization, x-access-token");
 
         }
-        //This one must always be present
+
 
     }
 }
