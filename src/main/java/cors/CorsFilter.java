@@ -20,9 +20,10 @@ public class CorsFilter implements ContainerResponseFilter {
         containerResponseContext.getHeaders().add("Access-Control-Allow-Origin", "*");
 
         containerRequestContext.getHeaders().add("Access-Control-Allow-Origin", "*");
-        if (containerRequestContext.getHeaderString("Origin") == null){
+
+        /*if (containerRequestContext.getHeaderString("Origin") == null){
             return;
-        }
+        }*/
         if (preFlightRequest(containerRequestContext)) {
             containerResponseContext.getHeaders().add("Access-Control-Allow-Credentials", "true");
             containerResponseContext.getHeaders().add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
